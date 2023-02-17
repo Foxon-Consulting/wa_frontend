@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: whiteapp
+  name: wa-frontend
+  labels:
+    app: wa-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wa-frontend
+  template:
+    metadata:
+      labels:
+        app: wa-frontend
+    spec:
+      containers:
+        - name: wa-frontend
+          image: lizzieb1416/wa_frontend:latest
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: wa-frontend-cm
